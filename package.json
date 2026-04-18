@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+<<<<<<< HEAD
     "react": "^19.2.4",
     "react-dom": "^19.2.4"
   },
@@ -23,5 +24,11 @@
     "eslint-plugin-react-refresh": "^0.5.2",
     "globals": "^17.4.0",
     "vite": "^8.0.4"
+=======
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
+    "multer": "^2.1.1",
+    "node-fetch": "^2.6.7"
+>>>>>>> f8426e49d560faac837c42ba80ab38216e3446f2
   }
 }
