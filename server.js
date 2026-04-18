@@ -1,5 +1,4 @@
 const express = require("express");
-const fetch = require("node-fetch");
 const multer = require("multer");
 const cors = require("cors");
 
@@ -92,8 +91,10 @@ app.post("/upload", upload.single("image"), async (req, res) => {
 });
 
 // ✅ CORRECT PORT
-const PORT = process.env.PORT || 3000;
+// const PORT = process.env.PORT || 3000;
+// app.listen(PORT, () => {
+//   console.log("✅ Server running on port " + PORT);
+// });
 
-app.listen(PORT, () => {
-  console.log("✅ Server running on port " + PORT);
-});
+// ✅ ADD THIS
+module.exports = app;
