@@ -1,23 +1,29 @@
-export default async function handler(req, res) {
+export default function handler(req, res) {
   try {
     if (req.method !== "POST") {
       return res.status(405).json({ error: "Only POST allowed" });
     }
 
-    // ✅ SAFE BODY PARSING FOR VERCEL
+    // ✅ SAFE BODY HANDLING (WORKS ON ALL VERCEL ENVIRONMENTS)
     let body = req.body;
 
-    // If body comes as string (Vercel sometimes does this)
-    if (typeof body === "string") {
-      body = JSON.parse(body);
+    if (!body) {
+      return res.status(400).json({ error: "Missing request body" });
     }
 
-    const question = body?.question;
+    // If body is string → parse it
+    if (typeof body === "string") {
+      try {
+        body = JSON.parse(body);
+      } catch (e) {
+        return res.status(400).json({ error: "Invalid JSON body" });
+      }
+    }
+
+    const question = body.question;
 
     if (!question) {
-      return res.status(400).json({
-        error: "No question received"
-      });
+      return res.status(400).json({ error: "Question is required" });
     }
 
     return res.status(200).json({
@@ -26,7 +32,7 @@ export default async function handler(req, res) {
 
   } catch (err) {
     return res.status(500).json({
-      error: "Function crashed",
+      error: "Server crashed",
       details: err.message
     });
   }
